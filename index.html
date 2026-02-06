@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Valentine ❤️</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body{
+margin:0;
+font-family:'Poppins',sans-serif;
+height:100vh;
+display:flex;
+align-items:center;
+justify-content:center;
+background:radial-gradient(circle,#ffb6c1,#ff5f7e);
+overflow:hidden;
+}
+
+.card{
+background:white;
+width:90%;
+max-width:420px;
+padding:20px;
+border-radius:25px;
+text-align:center;
+box-shadow:0 20px 40px rgba(0,0,0,.25);
+display:none;
+}
+
+.active{display:block}
+
+video{
+width:100%;
+border-radius:15px;
+margin-bottom:15px;
+}
+
+button{
+padding:12px 25px;
+border:none;
+border-radius:30px;
+font-size:16px;
+margin:10px;
+cursor:pointer;
+background:#ff4d6d;
+color:white;
+}
+
+#noBtn{position:absolute;}
+
+.slide-img{
+width:220px;
+height:220px;
+object-fit:cover;
+border-radius:20px;
+margin:15px 0;
+}
+
+.love-text{
+font-size:18px;
+color:#ff1a4d;
+font-weight:bold;
+min-height:60px;
+}
+</style>
+</head>
+
+<body>
+
+<audio id="music" src="perfect.mp3" loop></audio>
+
+<!-- PAGE 1 -->
+<div class="card active" id="p1">
+<video src="GIF1.mp4" autoplay loop muted></video>
+<h2>Will you be my Valentine? 💖</h2>
+<button onclick="startLove()">Yes 💖</button>
+<button id="noBtn">No 😜</button>
+</div>
+
+<!-- PAGE 2 -->
+<div class="card" id="p2">
+<video src="GIF2.mp4" autoplay loop muted></video>
+<h2>You make my world beautiful 😍</h2>
+<button onclick="go(3)">Next ➡️</button>
+</div>
+
+<!-- PAGE 3 -->
+<div class="card" id="p3">
+<video src="GIF3.mp4" autoplay loop muted></video>
+<h2>Every moment with you is special 💞</h2>
+<button onclick="go(4)">Next ➡️</button>
+</div>
+
+<!-- PAGE 4 -->
+<div class="card" id="p4">
+<video src="GIF4.mp4" autoplay loop muted></video>
+<h2>Memories of Us ❤️</h2>
+<img id="slide" class="slide-img" src="photo1.jpg">
+<div class="love-text" id="loveText"></div>
+</div>
+
+<script>
+const noBtn=document.getElementById("noBtn");
+noBtn.addEventListener("mouseover",()=>{
+noBtn.style.top=Math.random()*200+"px";
+noBtn.style.left=Math.random()*200+"px";
+});
+
+function startLove(){
+document.getElementById("music").play();
+go(2);
+}
+
+function go(n){
+document.querySelectorAll('.card').forEach(c=>c.classList.remove('active'));
+document.getElementById('p'+n).classList.add('active');
+if(n===4){ startSlideshow(); }
+}
+
+// Slideshow on last page
+const photos=["photo1.jpg","photo2.jpg","photo3.jpg","photo4.jpg"];
+const messages=[
+"You are my favorite person ❤️",
+"Life feels perfect with you 💫",
+"Your smile is my happiness 😊",
+"I love you more than words can say 💖"
+];
+
+let i=0;
+function startSlideshow(){
+const img=document.getElementById("slide");
+const text=document.getElementById("loveText");
+setInterval(()=>{
+img.src=photos[i];
+text.innerText=messages[i];
+i=(i+1)%photos.length;
+},2000);
+}
+</script>
+
+</body>
+</html>
